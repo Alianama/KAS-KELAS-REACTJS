@@ -20,7 +20,7 @@ function Amount() {
   return (
     <div className="d-flex w-100 gap-9 text-white">
       <div
-        className={`card bg-1 shadow border-none d-flex flex-row items-center w-full gap-10 p-4 transition duration-300 ease-in-out hover:scale-105  rounded-setup ${
+        className={`card bg-1 shadow border-none d-flex flex-row items-center w-full gap-10 p-4 transition duration-300 ease-in-out hover:scale-105  rounded-setup cursor-pointer ${
           loading ? "animate-pulse" : ""
         }`}
       >
@@ -46,7 +46,7 @@ function Amount() {
         </span>{" "}
       </div>
       <div
-        className={`card bg-2 shadow border-none d-flex flex-row items-center w-full gap-10 p-4 transition duration-300 ease-in-out hover:scale-105  rounded-setup ${
+        className={`card bg-2 shadow border-none d-flex flex-row items-center w-full gap-10 p-4 transition duration-300 ease-in-out hover:scale-105  rounded-setup cursor-pointer ${
           loading ? "animate-pulse" : ""
         }`}
       >
@@ -72,7 +72,7 @@ function Amount() {
         </span>{" "}
       </div>
       <div
-        className={`card bg-0 shadow border-none d-flex flex-row items-center w-full gap-10 p-4 transition duration-300 ease-in-out hover:scale-105  rounded-setup ${
+        className={`card bg-0 shadow border-none d-flex flex-row items-center w-full gap-10 p-4 transition duration-300 ease-in-out hover:scale-105  rounded-setup cursor-pointer ${
           loading ? "animate-pulse" : ""
         }`}
       >

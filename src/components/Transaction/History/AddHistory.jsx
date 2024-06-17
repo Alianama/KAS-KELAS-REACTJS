@@ -97,8 +97,8 @@ function Table() {
             onClick={() => handlePageChange(index + 1)}
             className={`px-3 py-1 mx-1 ${
               currentPage === index + 1
-                ? "bg-blue-500 text-white rounded-full"
-                : "bg-gray-200 rounded-full"
+                ? "bg-2 text-white rounded-full"
+                : "bg-1 rounded-full"
             }`}
           >
             {index + 1}
