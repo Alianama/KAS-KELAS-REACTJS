@@ -24,12 +24,17 @@ import {
   MdAssignment,
 } from "react-icons/md";
 import { AiOutlineTransaction } from "react-icons/ai";
+import "./output.css";
+import "./App.css";
 
 function App() {
   return (
     <BrowserRouter>
-      <div className="d-flex">
-        <CSidebar className="vh-100 border-end">
+      <div className="d-flex  ">
+        <CSidebar
+          className="vh-100 border-end bg-3 rounded-r-setup shadow-md"
+          style={{ position: "fixed", zIndex: "99" }}
+        >
           <CSidebarHeader className="border-bottom justify-content-center align-content-center ">
             <CSidebarBrand className=" text-decoration-none ">
               <h5>KAS KELAS</h5>
@@ -75,11 +80,11 @@ function App() {
               </Link>
             </CNavItem>
           </CSidebarNav>
-          <CSidebarHeader className="border-top">
-            <CSidebarToggler />
+          <CSidebarHeader className="border-top bg-2 rounded-br-setup ">
+            <CSidebarToggler className=" " />
           </CSidebarHeader>
         </CSidebar>
-        <div className="p-3 w-100">
+        <div className="pl-3 w-100" style={{ marginLeft: "240px" }}>
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/transaksi/add" element={<AddTransaksi />} />
