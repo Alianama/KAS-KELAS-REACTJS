@@ -66,6 +66,7 @@ function Table() {
             <CTableHeaderCell scope="col">User</CTableHeaderCell>
             <CTableHeaderCell scope="col">Category</CTableHeaderCell>
             <CTableHeaderCell scope="col">Amount</CTableHeaderCell>
+            <CTableHeaderCell scope="col">Status</CTableHeaderCell>
           </CTableRow>
         </CTableHead>
         <CTableBody>
@@ -80,12 +81,24 @@ function Table() {
                   currency: "IDR",
                 }).format(transaction.add_transaction)}
               </CTableDataCell>
+              <CTableDataCell>
+                {transaction.add_transaction > 0 ? (
+                  <button className="bg-green-500 hover:bg-green-700 text-white p-1 flex justify-center items-center rounded-lg">
+                    Success
+                  </button>
+                ) : (
+                  <button className="bg-red-500 hover:bg-red-700 text-white p-1 rounded">
+                    Invalid
+                  </button>
+                )}
+              </CTableDataCell>
             </CTableRow>
           ))}
           {/* Fill empty rows if currentData.length is less than itemsPerPage */}
           {Array.from({ length: itemsPerPage - currentData.length }).map(
             (_, index) => (
               <CTableRow key={`empty-${index}`} className="h-10">
+                <CTableDataCell></CTableDataCell>
                 <CTableDataCell></CTableDataCell>
                 <CTableDataCell></CTableDataCell>
                 <CTableDataCell></CTableDataCell>

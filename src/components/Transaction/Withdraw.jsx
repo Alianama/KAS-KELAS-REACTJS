@@ -44,14 +44,14 @@ function Withdraw() {
 
   return (
     <CForm
-      className="row mx-10 p-2  g-3 transition shadow-xl bg-0 rounded-setup"
+      className="row p-2  g-3  shadow-xl bg-0 rounded-setup"
       onSubmit={handleSubmit}
     >
       <CCol md={4}>
         <CFormInput
           type="text"
           id="validationDefault01"
-          label="Nama lengkap"
+          label="Nama Penarik"
           placeholder="Ali"
           value={user}
           required
@@ -61,9 +61,9 @@ function Withdraw() {
       </CCol>
       <CCol md={4}>
         <CFormInput
-          type="text"
+          type="textarea"
           id="validationDefault03"
-          label="Descriptions"
+          label="Descriptions Kebutuhan"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           required
@@ -80,14 +80,20 @@ function Withdraw() {
           size="sm"
         >
           <option value="" disabled>
-            Choose...
+            Pilih...
           </option>
           <option value="Pembayaran KAS">Pembayaran KAS</option>
           <option value="Pembayaran Iuran">Pembayaran Iuran</option>
+          <option value="Pembelian Perlengkapan">Pembelian Perlengkapan</option>
+          <option value="Biaya Operasional">Biaya Operasional</option>
+          <option value="Biaya Perawatan">Biaya Perawatan</option>
+          <option value="Biaya Lainnya">Biaya Lainnya</option>
         </CFormSelect>
       </CCol>
       <CCol md={4}>
-        <CFormLabel htmlFor="validationDefaultUsername">Amount RP.</CFormLabel>
+        <CFormLabel htmlFor="validationDefaultUsername">
+          Jumlah Penarikan RP.
+        </CFormLabel>
 
         <CFormInput
           type="number"
@@ -112,7 +118,11 @@ function Withdraw() {
         />
       </CCol>
       <CCol xs={12}>
-        <CButton className="bg-2 hover:bg-1 text-white" type="submit" size="sm">
+        <CButton
+          className="bg-2 rounded-setup hover:bg-1 text-white"
+          type="submit"
+          size="sm"
+        >
           Withdraw KAS
         </CButton>
       </CCol>

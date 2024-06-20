@@ -90,10 +90,10 @@ function AddTransaction() {
         <CFormLabel htmlFor="validationDefaultUsername">Amount RP.</CFormLabel>
 
         <CFormInput
-          type="number"
+          type="text"
           id="validationDefaultUsername"
           value={amount}
-          onChange={(e) => setAmount(e.target.value)}
+          onChange={(e) => setAmount(e.target.value.replace(/\D/g, ""))}
           aria-describedby="inputGroupPrepend02"
           placeholder="50.000"
           required
