@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import {
   CTable,
   CTableHead,
-  CTableBody,
   CTableRow,
   CTableHeaderCell,
   CTableDataCell,
+  CTableBody,
 } from "@coreui/react";
 import fetchDataFromAPI from "./index.js";
 
@@ -58,36 +58,22 @@ function Table() {
   }
 
   return (
-    <div className="flex w-full flex-col shadow-xl rounded-setup hover:scale-105 transition duration-300 ease-in-out p-5 overflow-hidden">
-      <CTable className="bg-2  rounded-lg" color="">
-        <CTableHead color="dark" className="  rounded-lg">
+    <div className="mx-10 w-5/5 shadow-xl rounded-setup p-10 overflow-hidden">
+      <CTable className="rounded-lg" color="">
+        <CTableHead color="dark" className="rounded-lg">
           <CTableRow>
-            <CTableHeaderCell scope="col" className="text-sm">
-              Date
-            </CTableHeaderCell>
-            <CTableHeaderCell scope="col" className="text-sm">
-              User
-            </CTableHeaderCell>
-            <CTableHeaderCell scope="col" className="text-sm">
-              Category
-            </CTableHeaderCell>
-            <CTableHeaderCell scope="col" className="text-sm">
-              Amount
-            </CTableHeaderCell>
+            <CTableHeaderCell scope="col">Date</CTableHeaderCell>
+            <CTableHeaderCell scope="col">User</CTableHeaderCell>
+            <CTableHeaderCell scope="col">Category</CTableHeaderCell>
+            <CTableHeaderCell scope="col">Amount</CTableHeaderCell>
           </CTableRow>
         </CTableHead>
         <CTableBody>
           {currentData.map((transaction, index) => (
-            <CTableRow key={index} className="h-5">
-              <CTableDataCell className="text-sm">
-                {transaction.date_update}
-              </CTableDataCell>
-              <CTableDataCell className="text-sm">
-                {transaction.user}
-              </CTableDataCell>
-              <CTableDataCell className="text-sm">
-                {transaction.category}
-              </CTableDataCell>
+            <CTableRow key={index} className="h-10">
+              <CTableDataCell>{transaction.date_update}</CTableDataCell>
+              <CTableDataCell>{transaction.user}</CTableDataCell>
+              <CTableDataCell>{transaction.category}</CTableDataCell>
               <CTableDataCell>
                 {new Intl.NumberFormat("id-ID", {
                   style: "currency",
@@ -99,7 +85,7 @@ function Table() {
           {/* Fill empty rows if currentData.length is less than itemsPerPage */}
           {Array.from({ length: itemsPerPage - currentData.length }).map(
             (_, index) => (
-              <CTableRow key={`empty-${index}`} className=" h-5">
+              <CTableRow key={`empty-${index}`} className="h-10">
                 <CTableDataCell></CTableDataCell>
                 <CTableDataCell></CTableDataCell>
                 <CTableDataCell></CTableDataCell>

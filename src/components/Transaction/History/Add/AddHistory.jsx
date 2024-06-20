@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import {
   CTable,
   CTableHead,
-  CTableBody,
   CTableRow,
   CTableHeaderCell,
   CTableDataCell,
+  CTableBody,
 } from "@coreui/react";
 import fetchDataFromAPI from "./index.js";
 
@@ -58,9 +58,9 @@ function Table() {
   }
 
   return (
-    <div className="mx-10 w-4/5 shadow-xl rounded-setup  p-10 overflow-hidden">
-      <CTable className=" rounded-lg" color="">
-        <CTableHead color="dark" className=" rounded-lg">
+    <div className="mx-10 w-5/5 shadow-xl rounded-setup p-10 overflow-hidden">
+      <CTable className="rounded-lg" color="">
+        <CTableHead color="dark" className="rounded-lg">
           <CTableRow>
             <CTableHeaderCell scope="col">Date</CTableHeaderCell>
             <CTableHeaderCell scope="col">User</CTableHeaderCell>
@@ -74,7 +74,12 @@ function Table() {
               <CTableDataCell>{transaction.date_update}</CTableDataCell>
               <CTableDataCell>{transaction.user}</CTableDataCell>
               <CTableDataCell>{transaction.category}</CTableDataCell>
-              <CTableDataCell>Rp. {transaction.add_transaction}</CTableDataCell>
+              <CTableDataCell>
+                {new Intl.NumberFormat("id-ID", {
+                  style: "currency",
+                  currency: "IDR",
+                }).format(transaction.add_transaction)}
+              </CTableDataCell>
             </CTableRow>
           ))}
           {/* Fill empty rows if currentData.length is less than itemsPerPage */}

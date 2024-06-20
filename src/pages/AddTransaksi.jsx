@@ -1,21 +1,19 @@
-import { CBreadcrumb, CBreadcrumbItem } from "@coreui/react";
 import AddTransaction from "../components/Transaction/Add";
-import AddHistory from "../components/Transaction/History/AddHistory";
-import "../output.css";
+import AddHistory from "../components/Transaction/History/Add/AddHistory";
 
 function AddTransaksi() {
   return (
-    <div className="d-flex flex-col gap-1">
-      <div className=" d-flex flex-col gap-10  ">
-        <div
-          className="header flex flex-row-reverse w-full items-center pl-10 top-0 shadow-sm "
-          style={{ position: "sticky", zIndex: "10" }}
-        >
-          <div className="text-3xl  mb-4">Add Transaksi</div>
-          <CBreadcrumb>
-            <CBreadcrumbItem href="/">Home</CBreadcrumbItem>
-            <CBreadcrumbItem active>Add Transaksi</CBreadcrumbItem>
-          </CBreadcrumb>
+    <div className="flex w-full flex-col gap-1">
+      <div className=" flex flex-col gap-10  ">
+        <div className="flex w-full sticky top-0 pl-10 p-4 items-center justify-between shadow-md bg-white bg-opacity-50 backdrop-blur-sm">
+          <div className="flex">
+            <a href="/">Home</a>
+            <span> / </span>
+            <a href="/transaksi/add">Add Transaction</a>
+          </div>
+          <div className="flex">
+            <h1>Transaction</h1>
+          </div>
         </div>
         <div>
           <AddTransaction />

@@ -9,7 +9,7 @@ import {
 } from "@coreui/react";
 import fetchData from "./index.js";
 
-function AddTransaction() {
+function Withdraw() {
   const [date, setDate] = useState("");
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
@@ -30,8 +30,8 @@ function AddTransaction() {
       description,
       date_update: date,
       user,
-      add_transaction: parseInt(amount, 10),
-      withdraw_transaction: 0,
+      add_transaction: 0,
+      withdraw_transaction: parseInt(amount, 10),
     };
 
     await fetchData(data);
@@ -113,11 +113,11 @@ function AddTransaction() {
       </CCol>
       <CCol xs={12}>
         <CButton className="bg-2 hover:bg-1 text-white" type="submit" size="sm">
-          Masukan Kas
+          Withdraw KAS
         </CButton>
       </CCol>
     </CForm>
   );
 }
 
-export default AddTransaction;
+export default Withdraw;

@@ -1,7 +1,7 @@
-import "../../../output.css";
-import { FaMoneyBill, FaCalendar } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import fetchDataFromAPI from "./index";
+import { FaMoneyCheckDollar } from "react-icons/fa6";
+import { MdCalendarMonth } from "react-icons/md";
 
 function Amount() {
   const [data, setData] = useState(null);
@@ -9,96 +9,65 @@ function Amount() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await fetchDataFromAPI();
-      setData(result);
-      setLoading(false);
+      setLoading(true);
+      try {
+        const result = await fetchDataFromAPI();
+        setData(result);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchData();
   }, []);
-
+  console.log(data);
   return (
-    <div className="d-flex w-100 gap-9 text-white">
-      <div
-        className={`card bg-1 shadow border-none d-flex flex-row items-center w-full gap-10 p-4 transition duration-300 ease-in-out hover:scale-105  rounded-setup cursor-pointer ${
-          loading ? "animate-pulse" : ""
-        }`}
-      >
-        <div className="card-body d-flex flex-col w-full ">
-          <h1 className="card-title text-white">Total Uang Kas</h1>
-          {data && (
-            <h1 className="card-text text-4xl text-white">
-              IDR{" "}
-              {new Intl.NumberFormat("id-ID", {
-                style: "currency",
-                currency: "IDR",
-              }).format(isNaN(data.totalAmount) ? 0 : data.totalAmount)}
-            </h1>
-          )}
-          {loading && (
-            <h1 className="card-text text-4xl text-white animate-pulse">
-              IDR Rp. ...
-            </h1>
-          )}
+    <div className="flex flex-row gap-5">
+      <div className="flex gap-5 justify-center items-center bg-1 w-2/5 shadow-md p-4 rounded-setup text-white hover:scale-105 transition-all">
+        <div>
+          <h2>Total Uang Kas</h2>
+          <h1 className="text-md">
+            {loading
+              ? "Loading..."
+              : new Intl.NumberFormat("id-ID", {
+                  style: "currency",
+                  currency: "IDR",
+                }).format(data.totalAmount)}
+          </h1>
         </div>
-        <span className="mr-2 text-white ">
-          <FaMoneyBill size={50} />
-        </span>{" "}
+        <FaMoneyCheckDollar size={40} />
       </div>
-      <div
-        className={`card bg-2 shadow border-none d-flex flex-row items-center w-full gap-10 p-4 transition duration-300 ease-in-out hover:scale-105  rounded-setup cursor-pointer ${
-          loading ? "animate-pulse" : ""
-        }`}
-      >
-        <div className="card-body d-flex flex-col w-full ">
-          <h1 className="card-title text-white">Pemasukan Bulan Ini</h1>
-          {data && (
-            <h1 className="card-text text-4xl text-white">
-              IDR{" "}
-              {new Intl.NumberFormat("id-ID", {
-                style: "currency",
-                currency: "IDR",
-              }).format(isNaN(data.totalAddMonthly) ? 0 : data.totalAddMonthly)}
-            </h1>
-          )}
-          {loading && (
-            <h1 className="card-text text-4xl text-white animate-pulse">
-              IDR Rp. ...
-            </h1>
-          )}
+      <div className="flex gap-5 justify-center items-center bg-2 w-2/5 shadow-md p-4 rounded-setup text-white hover:scale-105 transition-all">
+        <div>
+          <h2>Pemasukan Bulan ini</h2>
+          <h1 className="text-md">
+            {loading
+              ? "Loading..."
+              : new Intl.NumberFormat("id-ID", {
+                  style: "currency",
+                  currency: "IDR",
+                }).format(data.totalAddMonthly)}
+          </h1>
         </div>
-        <span className="mr-2 text-white ">
-          <FaCalendar size={50} />
-        </span>{" "}
+        <MdCalendarMonth size={40} />
       </div>
-      <div
-        className={`card bg-0 shadow border-none d-flex flex-row items-center w-full gap-10 p-4 transition duration-300 ease-in-out hover:scale-105  rounded-setup cursor-pointer ${
-          loading ? "animate-pulse" : ""
-        }`}
-      >
-        <div className="card-body d-flex flex-col w-full ">
-          <h1 className="card-title ">Pengeluaran Bulan ini</h1>
-          {data && (
-            <h1 className="card-text text-4xl ">
-              IDR{" "}
-              {new Intl.NumberFormat("id-ID", {
-                style: "currency",
-                currency: "IDR",
-              }).format(
-                isNaN(data.totalWithdrawMonthly) ? 0 : data.totalWithdrawMonthly
-              )}
-            </h1>
-          )}
-          {loading && (
-            <h1 className="card-text text-4xl animate-pulse">IDR Rp. ...</h1>
-          )}
+      <div className="flex gap-5 justify-center items-center bg-0 w-2/5 shadow-md p-4 rounded-setup text-black hover:scale-105 transition-all">
+        <div>
+          <h2>Pengeluaran Bulan ini</h2>
+          <h1 className="text-md">
+            {loading
+              ? "Loading..."
+              : new Intl.NumberFormat("id-ID", {
+                  style: "currency",
+                  currency: "IDR",
+                }).format(data.totalWithdrawMonthly)}
+          </h1>
         </div>
-        <span className="mr-2">
-          <FaCalendar size={50} />
-        </span>{" "}
+        <MdCalendarMonth size={40} />
       </div>
     </div>
   );
 }
-
 export default Amount;

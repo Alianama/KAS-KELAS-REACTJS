@@ -1,4 +1,4 @@
-const fetchData = async () => {
+const fetchAddData = async () => {
   try {
     const response = await fetch(
       "http://kas-api.alipurnama.my.id/api/transactions/addhistory",
@@ -27,4 +27,4 @@ const fetchData = async () => {
   }
 };
 
-export default fetchData;
+export default fetchAddData;
