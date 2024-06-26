@@ -34,7 +34,7 @@ function Amount() {
               : new Intl.NumberFormat("id-ID", {
                   style: "currency",
                   currency: "IDR",
-                }).format(data.totalAmount)}
+                }).format(data.total_amount)}
           </h1>
         </div>
         <FaMoneyCheckDollar size={40} />

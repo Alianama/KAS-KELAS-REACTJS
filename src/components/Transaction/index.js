@@ -1,7 +1,7 @@
 const fetchData = async (data) => {
   try {
     const response = await fetch(
-      "http://kas-api.alipurnama.my.id/api/transactions",
+      "https://kas-api.alipurnama.my.id/api/transactions",
       {
         method: "POST",
         headers: {

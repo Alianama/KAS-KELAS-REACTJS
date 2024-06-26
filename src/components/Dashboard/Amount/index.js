@@ -5,14 +5,14 @@ const fetchDataFromAPI = async () => {
   const currentMonth = new Date().getMonth() + 1;
   try {
     const totalAmountResponse = await axios.get(
-      "http://kas-api.alipurnama.my.id/api/transactions/total-amount"
+      "https://kas-api.alipurnama.my.id/api/transactions/total-amount"
     );
     data.totalAmount = totalAmountResponse.data
       ? parseInt(totalAmountResponse.data.total_amount)
       : 0;
 
     const totalAddMonthlyResponse = await axios.get(
-      "http://kas-api.alipurnama.my.id/api/transactions/total-add-monthly"
+      "https://kas-api.alipurnama.my.id/api/transactions/total-add-monthly"
     );
     const currentMonthData = totalAddMonthlyResponse.data.find(
       (item) => item.month === currentMonth
@@ -22,7 +22,7 @@ const fetchDataFromAPI = async () => {
       : 0;
 
     const totalWithdrawMonthlyResponse = await axios.get(
-      "http://kas-api.alipurnama.my.id/api/transactions/total-withdraw-monthly"
+      "https://kas-api.alipurnama.my.id/api/transactions/total-withdraw-monthly"
     );
     const currentMonthWithdrawData = totalWithdrawMonthlyResponse.data.find(
       (item) => item.month === currentMonth
