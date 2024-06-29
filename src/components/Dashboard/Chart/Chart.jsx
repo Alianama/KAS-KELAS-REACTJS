@@ -49,7 +49,7 @@ const ChartComponent = () => {
   });
 
   return (
-    <div className="transition flex w-4/5 justify-center items-center p-10 duration-300 ease-in-out hover:scale-105 rounded-setup shadow-xl ">
+    <div className="transition flex w-4/5 justify-center items-center p-10 duration-300 ease-in-out hover:scale-105 rounded-setup shadow-xl cursor-pointer ">
       <CChart
         className="w-full flex"
         type="bar"

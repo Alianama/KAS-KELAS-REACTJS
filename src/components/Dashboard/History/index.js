@@ -1,7 +1,7 @@
 const fetchData = async () => {
   try {
     const response = await fetch(
-      "https://kas-api.alipurnama.my.id/api/transactions/history",
+      "http://localhost:8000/api/transactions/history",
       {
         method: "GET",
         headers: {
@@ -28,4 +28,3 @@ const fetchData = async () => {
 };
 
 export default fetchData;
-

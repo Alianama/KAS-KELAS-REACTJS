@@ -1,7 +1,7 @@
 const fetchAddData = async () => {
   try {
     const response = await fetch(
-      "https://kas-api.alipurnama.my.id/api/transactions/addhistory",
+      "http://localhost:8000/api/transactions/addhistory",
       {
         method: "GET",
         headers: {

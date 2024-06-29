@@ -15,6 +15,7 @@ function AddTransaction() {
   const [description, setDescription] = useState("");
   const [amount, setAmount] = useState("");
   const [user, setUser] = useState("");
+
   useEffect(() => {
     const today = new Date();
     const yyyy = today.getFullYear();
@@ -27,7 +28,9 @@ function AddTransaction() {
     setDate(todayFormatted);
   }, []);
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
     const data = {
       category,
       description,
@@ -37,12 +40,18 @@ function AddTransaction() {
       withdraw_transaction: 0,
     };
 
-    await fetchData(data);
-    setCategory("");
-    setDate(date);
-    setUser("");
-    setAmount("");
-    setDescription("");
+    const result = await fetchData(data);
+    if (result.status === "ok") {
+      // Reset form fields
+      setCategory("");
+      setUser("");
+      setAmount("");
+      setDescription("");
+      setDate("");
+    } else {
+      // Handle error
+      console.error("Error:", result.error);
+    }
   };
 
   return (

@@ -68,7 +68,7 @@ function Table() {
   }
 
   return (
-    <div className="flex w-full flex-col shadow-xl rounded-setup hover:scale-105 transition duration-300 ease-in-out p-5 overflow-hidden">
+    <div className="flex w-full flex-col shadow-xl rounded-setup hover:scale-105 transition duration-300 ease-in-out p-5 overflow-hidden cursor-pointer">
       <CTable
         className="bg-2 rounded-lg"
         onClick={() => navigate("/transaksi/riwayat")}

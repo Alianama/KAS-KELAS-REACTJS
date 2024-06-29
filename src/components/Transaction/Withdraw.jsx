@@ -24,7 +24,8 @@ function Withdraw() {
     setDate(todayFormatted);
   }, []);
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     const data = {
       category,
       description,
