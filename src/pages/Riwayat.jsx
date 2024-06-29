@@ -1,3 +1,5 @@
+import History from "../components/Dashboard/History/AllHistory.jsx";
+
 function Report() {
   return (
     <div className=" flex flex-col gap-10 w-full  ">
@@ -10,6 +12,9 @@ function Report() {
         <div className="flex">
           <h1>Riwayat</h1>
         </div>
+      </div>
+      <div>
+        <History />
       </div>
     </div>
   );

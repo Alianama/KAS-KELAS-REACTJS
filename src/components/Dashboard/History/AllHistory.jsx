@@ -15,6 +15,8 @@ function Table() {
   const [error, setError] = useState(null); // Add state to handle errors
   const [loading, setLoading] = useState(true); // Add state to handle loading
   const [currentPage, setCurrentPage] = useState(1); // Add state for pagination
+  const [searchTerm, setSearchTerm] = useState(""); // Add state for search term
+  const [sortType, setSortType] = useState("asc"); // Add state for sort type
 
   const itemsPerPage = 9; // Number of items per page
   const navigate = useNavigate();
@@ -30,7 +32,21 @@ function Table() {
               amount: item.add_transaction
                 ? item.add_transaction
                 : item.withdraw_transaction,
-              category: item.add_transaction ? "Add Transaction" : "Withdraw",
+              category: item.category,
+              status: item.add_transaction
+                ? { category: "Add", color: "bg-success" }
+                : { category: "Withdraw", color: "bg-danger" },
+              created_at: new Date(item.created_at).toLocaleDateString(
+                "id-ID",
+                {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                  hour: "2-digit",
+                  minute: "2-digit",
+                  second: "2-digit",
+                }
+              ),
             }))
           );
         } else {
@@ -49,14 +65,34 @@ function Table() {
   // Calculate the data to display on the current page
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentData = data.slice(indexOfFirstItem, indexOfLastItem);
+  const currentData = data
+    .filter((transaction) =>
+      Object.values(transaction).some((val) =>
+        String(val).toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    )
+    .sort((a, b) => {
+      const isReversed = sortType === "asc" ? 1 : -1;
+      return isReversed * a.created_at.localeCompare(b.created_at);
+    })
+    .slice(indexOfFirstItem, indexOfLastItem);
 
   // Calculate total pages based on the available data length
-  const totalPages = Math.ceil(data.length / itemsPerPage);
+  const totalPages = Math.ceil(currentData.length / itemsPerPage);
 
   // Handle page change
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
+  };
+
+  // Handle search term change
+  const handleSearchTermChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  // Handle sort type change
+  const handleSortTypeChange = () => {
+    setSortType(sortType === "asc" ? "desc" : "asc");
   };
 
   if (loading) {
@@ -68,7 +104,22 @@ function Table() {
   }
 
   return (
-    <div className="flex w-full flex-col shadow-xl rounded-setup hover:scale-105 transition duration-300 ease-in-out p-5 overflow-hidden">
+    <div className="flex w-full flex-col shadow-xl rounded-setup transition duration-300 ease-in-out p-5 overflow-hidden">
+      <div className="flex justify-between items-center mb-4">
+        <input
+          type="text"
+          placeholder="Cari riwayat..."
+          value={searchTerm}
+          onChange={handleSearchTermChange}
+          className="px-10 py-1 border rounded-setup"
+        />
+        <button
+          className=" bg-2 py-1 text-white px-2 rounded-setup "
+          onClick={handleSortTypeChange}
+        >
+          Urutkan {sortType === "asc" ? "terbaru" : "terlama"}
+        </button>
+      </div>
       <CTable
         className="bg-2 rounded-lg"
         onClick={() => navigate("/transaksi/riwayat")}
@@ -86,7 +137,16 @@ function Table() {
               Category
             </CTableHeaderCell>
             <CTableHeaderCell scope="col" className="text-sm">
+              Description
+            </CTableHeaderCell>
+            <CTableHeaderCell scope="col" className="text-sm">
+              Created At
+            </CTableHeaderCell>
+            <CTableHeaderCell scope="col" className="text-sm">
               Amount
+            </CTableHeaderCell>
+            <CTableHeaderCell scope="col" className="text-sm">
+              Status
             </CTableHeaderCell>
           </CTableRow>
         </CTableHead>
@@ -102,11 +162,24 @@ function Table() {
               <CTableDataCell className="text-sm">
                 {transaction.category}
               </CTableDataCell>
+              <CTableDataCell className="text-sm">
+                {transaction.description}
+              </CTableDataCell>
+              <CTableDataCell className="text-sm">
+                {transaction.created_at}
+              </CTableDataCell>
               <CTableDataCell>
                 {new Intl.NumberFormat("id-ID", {
                   style: "currency",
                   currency: "IDR",
                 }).format(transaction.amount)}
+              </CTableDataCell>
+              <CTableDataCell>
+                <button
+                  className={`px-3 py-1 ${transaction.status.color} rounded-full`}
+                >
+                  {transaction.status.category}
+                </button>
               </CTableDataCell>
             </CTableRow>
           ))}
@@ -114,6 +187,9 @@ function Table() {
           {Array.from({ length: itemsPerPage - currentData.length }).map(
             (_, index) => (
               <CTableRow key={`empty-${index}`} className=" h-5">
+                <CTableDataCell></CTableDataCell>
+                <CTableDataCell></CTableDataCell>
+                <CTableDataCell></CTableDataCell>
                 <CTableDataCell></CTableDataCell>
                 <CTableDataCell></CTableDataCell>
                 <CTableDataCell></CTableDataCell>

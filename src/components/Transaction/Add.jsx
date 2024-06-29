@@ -20,7 +20,10 @@ function AddTransaction() {
     const yyyy = today.getFullYear();
     const mm = String(today.getMonth() + 1).padStart(2, "0");
     const dd = String(today.getDate()).padStart(2, "0");
-    const todayFormatted = `${yyyy}-${mm}-${dd}`;
+    const hh = String(today.getHours()).padStart(2, "0");
+    const min = String(today.getMinutes()).padStart(2, "0");
+    const ss = String(today.getSeconds()).padStart(2, "0");
+    const todayFormatted = `${yyyy}-${mm}-${dd}T${hh}:${min}:${ss}`;
     setDate(todayFormatted);
   }, []);
 
@@ -102,7 +105,7 @@ function AddTransaction() {
       </CCol>
       <CCol md={3}>
         <CFormInput
-          type="date"
+          type="datetime-local"
           id="validationDefault05"
           label="Date"
           value={date}

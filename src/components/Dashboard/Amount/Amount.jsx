@@ -4,7 +4,7 @@ import { FaMoneyCheckDollar } from "react-icons/fa6";
 import { MdCalendarMonth } from "react-icons/md";
 
 function Amount() {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState("0");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -34,7 +34,7 @@ function Amount() {
               : new Intl.NumberFormat("id-ID", {
                   style: "currency",
                   currency: "IDR",
-                }).format(data.total_amount)}
+                }).format(data.totalAmount)}
           </h1>
         </div>
         <FaMoneyCheckDollar size={40} />
